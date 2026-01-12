@@ -65,7 +65,7 @@ const Home = () => {
           {/* CINEMATIC VIDEO SECTION - NO PLAY BUTTON - CONTINUOUS LOOP */}
           <div className="relative rounded-[3rem] overflow-hidden shadow-2xl border-[12px] border-white aspect-video bg-slate-900">
             <video 
-              src="/waaa.mp4" 
+              src="/what.mp4" 
               autoPlay 
               muted 
               loop 
