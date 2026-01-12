@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import { Menu, X, CheckCircle, Mail, Phone, MapPin, Instagram, Play, Star, Send } from 'lucide-react';
+import { Menu, X, CheckCircle, Mail, Phone, MapPin, Instagram, Star, Send } from 'lucide-react';
 
 // --- Shared Navbar ---
 const Navbar = () => {
@@ -11,7 +11,7 @@ const Navbar = () => {
         <div className="h-12 w-12 bg-white rounded-full overflow-hidden border-2 border-white">
           <img src="/logo.jpg" alt="Logo" className="h-full w-full object-cover" />
         </div>
-        <span className="text-2xl font-black italic tracking-tighter">SPAKU</span>
+        <span className="text-2xl font-black italic tracking-tighter uppercase">SPAKU</span>
       </div>
       
       <div className="hidden md:flex gap-8 font-black uppercase text-[10px] tracking-widest">
@@ -62,21 +62,17 @@ const Home = () => {
             </div>
           </div>
           
-          {/* THE CORRECTED VIDEO TAG */}
-          <div className="relative rounded-[3rem] overflow-hidden shadow-2xl border-[12px] border-white aspect-video bg-slate-900 group">
+          {/* CINEMATIC VIDEO SECTION - NO PLAY BUTTON - CONTINUOUS LOOP */}
+          <div className="relative rounded-[3rem] overflow-hidden shadow-2xl border-[12px] border-white aspect-video bg-slate-900">
             <video 
               src="/what.mp4" 
               autoPlay 
               muted 
               loop 
               playsInline
-              className="w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity duration-500"
+              disablePictureInPicture
+              className="w-full h-full object-cover"
             />
-            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-              <div className="bg-white/10 backdrop-blur-sm p-6 rounded-full text-white border border-white/20 group-hover:scale-110 transition-transform duration-500">
-                <Play size={40} fill="currentColor" className="ml-1" />
-              </div>
-            </div>
           </div>
         </div>
       </section>
@@ -99,12 +95,17 @@ const Home = () => {
 // --- About Page ---
 const About = () => (
   <div className="pt-40 pb-20 px-6 max-w-4xl mx-auto">
-    <h1 className="text-6xl font-black italic text-[#1a3c87] mb-8 uppercase">About Us</h1>
+    <h1 className="text-6xl font-black italic text-[#1a3c87] mb-8 uppercase tracking-tighter">About Us</h1>
     <p className="text-2xl font-bold text-slate-700 leading-relaxed border-l-8 border-blue-600 pl-6 mb-10">
-      Spaku Kleaners Limited delivers top-notch cleaning solutions tailored to your unique needs in Lagos.
+      At Spaku Kleaners Limited, we pride ourselves on delivering top-notch cleaning solutions tailored to meet the unique needs of our clients in Lagos.
     </p>
-    <div className="bg-slate-900 p-10 rounded-[3rem] text-white italic font-black text-xl">
-      "Join the countless satisfied clients who have experienced the Spaku difference."
+    <div className="grid gap-6">
+       <div className="bg-slate-100 p-10 rounded-[3rem] border border-slate-200">
+          <h3 className="text-2xl font-black text-[#1a3c87] mb-4 uppercase">Our Commitment</h3>
+          <p className="font-bold text-slate-600 leading-relaxed">
+             Our dedicated team of professionals is committed to ensuring your spaces are spotless, hygienic, and welcoming. We bring years of experience to every corner we clean.
+          </p>
+       </div>
     </div>
   </div>
 );
@@ -114,19 +115,19 @@ const Contact = () => (
   <div className="pt-40 pb-20 px-6 max-w-7xl mx-auto">
     <div className="grid lg:grid-cols-2 gap-16">
       <div>
-        <h2 className="text-7xl font-black italic text-[#1a3c87] mb-8 uppercase">Contact.</h2>
+        <h2 className="text-7xl font-black italic text-[#1a3c87] mb-8 uppercase tracking-tighter">Contact.</h2>
         <div className="space-y-6">
-          <div className="flex items-center gap-4 text-xl font-black italic"><MapPin className="text-blue-600"/> Lagos: Ikoyi, VI, Lekki</div>
-          <div className="flex items-center gap-4 text-xl font-black italic"><Phone className="text-blue-600"/> 08061946478</div>
-          <div className="flex items-center gap-4 text-xl font-black italic"><Mail className="text-blue-600"/> spakucleaninglimited@yahoo.com</div>
+          <div className="flex items-center gap-4 text-xl font-black italic"><MapPin className="text-blue-600" size={24}/> Ikoyi, VI, Lekki, Banana Island</div>
+          <div className="flex items-center gap-4 text-xl font-black italic"><Phone className="text-blue-600" size={24}/> 08061946478</div>
+          <div className="flex items-center gap-4 text-xl font-black italic"><Mail className="text-blue-600" size={24}/> spakucleaninglimited@yahoo.com</div>
         </div>
       </div>
-      <div className="bg-slate-950 p-10 rounded-[3rem]">
+      <div className="bg-slate-950 p-10 rounded-[3rem] shadow-2xl">
         <form action="https://formspree.io/f/mjkwrkkz" method="POST" className="space-y-4">
-          <input type="text" name="name" placeholder="NAME" className="w-full p-5 rounded-2xl bg-white/10 text-white font-black" required />
-          <input type="email" name="email" placeholder="EMAIL" className="w-full p-5 rounded-2xl bg-white/10 text-white font-black" required />
-          <textarea name="message" placeholder="MESSAGE" className="w-full p-5 rounded-2xl bg-white/10 text-white font-black h-32"></textarea>
-          <button className="w-full bg-blue-600 p-5 rounded-2xl font-black text-white flex items-center justify-center gap-2">SEND <Send size={20}/></button>
+          <input type="text" name="name" placeholder="YOUR NAME" className="w-full p-5 rounded-2xl bg-white/10 text-white font-black border border-white/10 focus:border-blue-500 outline-none" required />
+          <input type="email" name="email" placeholder="EMAIL ADDRESS" className="w-full p-5 rounded-2xl bg-white/10 text-white font-black border border-white/10 focus:border-blue-500 outline-none" required />
+          <textarea name="message" placeholder="TELL US ABOUT YOUR CLEANING NEEDS..." className="w-full p-5 rounded-2xl bg-white/10 text-white font-black h-32 border border-white/10 focus:border-blue-500 outline-none"></textarea>
+          <button className="w-full bg-blue-600 hover:bg-white hover:text-blue-900 transition-all p-5 rounded-2xl font-black text-white flex items-center justify-center gap-2 tracking-widest uppercase">SEND REQUEST <Send size={20}/></button>
         </form>
       </div>
     </div>
@@ -137,15 +138,17 @@ const Contact = () => (
 export default function App() {
   return (
     <Router>
-      <div className="min-h-screen font-sans">
+      <div className="min-h-screen bg-white selection:bg-yellow-200">
         <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/services" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-        </Routes>
-        <footer className="bg-[#1a3c87] text-white py-12 mt-20 text-center">
-          <p className="font-black uppercase text-[10px] tracking-[0.4em] opacity-60">
+        <main>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/services" element={<About />} />
+            <Route path="/contact" element={<Contact />} />
+          </Routes>
+        </main>
+        <footer className="bg-[#1a3c87] text-white py-12 mt-20 text-center border-t border-white/10">
+          <p className="font-black uppercase text-[10px] tracking-[0.5em] opacity-60">
             © 2026 SPAKU KLEANERS LIMITED
           </p>
         </footer>
