@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import { Menu, X, CheckCircle, Mail, Phone, MapPin, Instagram, Star, Send } from 'lucide-react';
+import { Menu, X, CheckCircle, Mail, Phone, MapPin, Instagram, Star, Send, ArrowUpRight } from 'lucide-react';
 
 // --- Shared Navbar ---
 const Navbar = () => {
@@ -8,10 +8,10 @@ const Navbar = () => {
   return (
     <nav className="fixed top-0 w-full z-50 bg-[#1a3c87] text-white px-6 h-20 flex items-center justify-between shadow-2xl">
       <div className="flex items-center gap-3">
-        <div className="h-12 w-12 bg-white rounded-full overflow-hidden border-2 border-white">
+        <div className="h-10 w-10 bg-white rounded-full overflow-hidden border-2 border-white">
           <img src="/logo.jpg" alt="Logo" className="h-full w-full object-cover" />
         </div>
-        <span className="text-2xl font-black italic tracking-tighter uppercase">SPAKU</span>
+        <span className="text-xl font-black italic tracking-tighter uppercase">SPAKU</span>
       </div>
       
       <div className="hidden md:flex gap-8 font-black uppercase text-[10px] tracking-widest">
@@ -21,7 +21,7 @@ const Navbar = () => {
       </div>
 
       <button className="md:hidden" onClick={() => setIsOpen(!isOpen)}>
-        {isOpen ? <X size={30} /> : <Menu size={30} />}
+        {isOpen ? <X size={28} /> : <Menu size={28} />}
       </button>
 
       {isOpen && (
@@ -62,17 +62,8 @@ const Home = () => {
             </div>
           </div>
           
-          {/* CINEMATIC VIDEO SECTION - NO PLAY BUTTON - CONTINUOUS LOOP */}
           <div className="relative rounded-[3rem] overflow-hidden shadow-2xl border-[12px] border-white aspect-video bg-slate-900">
-            <video 
-              src="/what.mp4" 
-              autoPlay 
-              muted 
-              loop 
-              playsInline
-              disablePictureInPicture
-              className="w-full h-full object-cover"
-            />
+            <video src="/what.mp4" autoPlay muted loop playsInline className="w-full h-full object-cover" />
           </div>
         </div>
       </section>
@@ -94,25 +85,23 @@ const Home = () => {
 
 // --- About Page ---
 const About = () => (
-  <div className="pt-40 pb-20 px-6 max-w-4xl mx-auto">
+  <div className="pt-40 pb-20 px-6 max-w-4xl mx-auto text-left">
     <h1 className="text-6xl font-black italic text-[#1a3c87] mb-8 uppercase tracking-tighter">About Us</h1>
     <p className="text-2xl font-bold text-slate-700 leading-relaxed border-l-8 border-blue-600 pl-6 mb-10">
       At Spaku Kleaners Limited, we pride ourselves on delivering top-notch cleaning solutions tailored to meet the unique needs of our clients in Lagos.
     </p>
-    <div className="grid gap-6">
-       <div className="bg-slate-100 p-10 rounded-[3rem] border border-slate-200">
-          <h3 className="text-2xl font-black text-[#1a3c87] mb-4 uppercase">Our Commitment</h3>
-          <p className="font-bold text-slate-600 leading-relaxed">
-             Our dedicated team of professionals is committed to ensuring your spaces are spotless, hygienic, and welcoming. We bring years of experience to every corner we clean.
-          </p>
-       </div>
+    <div className="bg-slate-100 p-10 rounded-[3rem] border border-slate-200">
+      <h3 className="text-2xl font-black text-[#1a3c87] mb-4 uppercase">Our Commitment</h3>
+      <p className="font-bold text-slate-600 leading-relaxed">
+         Our dedicated team is committed to ensuring your spaces are spotless, hygienic, and welcoming.
+      </p>
     </div>
   </div>
 );
 
 // --- Contact Page ---
 const Contact = () => (
-  <div className="pt-40 pb-20 px-6 max-w-7xl mx-auto">
+  <div className="pt-40 pb-20 px-6 max-w-7xl mx-auto text-left">
     <div className="grid lg:grid-cols-2 gap-16">
       <div>
         <h2 className="text-7xl font-black italic text-[#1a3c87] mb-8 uppercase tracking-tighter">Contact.</h2>
@@ -134,6 +123,75 @@ const Contact = () => (
   </div>
 );
 
+// --- Detailed Footer ---
+const Footer = () => {
+  return (
+    <footer className="bg-[#1a3c87] text-white pt-20 pb-10 border-t border-white/10 px-6 mt-20 text-left">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+        {/* Brand Column */}
+        <div className="space-y-6">
+          <div className="flex items-center gap-3">
+            <div className="h-10 w-10 bg-white rounded-full overflow-hidden border border-white">
+              <img src="/logo.jpg" alt="Logo" className="h-full w-full object-cover" />
+            </div>
+            <span className="text-xl font-black italic tracking-tighter uppercase">SPAKU</span>
+          </div>
+          <p className="text-sm font-bold opacity-70 leading-relaxed">
+            Premium cleaning for Lagos' finest neighborhoods. Excellence in every corner.
+          </p>
+          <div className="flex gap-4">
+            <a href="https://instagram.com/spaku_kleaners" target="_blank" rel="noreferrer" className="bg-white/10 p-3 rounded-xl hover:bg-yellow-400 hover:text-blue-900 transition-all">
+              <Instagram size={20} />
+            </a>
+            {/* TikTok Link */}
+            <a href="https://tiktok.com/@spaku.kleanerslimited" target="_blank" rel="noreferrer" className="bg-white/10 p-3 rounded-xl hover:bg-black transition-all">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.17-2.89-.6-4.13-1.47-.13 3.35-.14 6.7-.13 10.05-.03 2.1-.8 4.25-2.4 5.68-1.74 1.61-4.32 2.22-6.55 1.61-2.22-.55-4.15-2.2-4.9-4.32-.88-2.35-.38-5.18 1.34-7.01 1.4-1.57 3.53-2.36 5.62-2.13v4.18c-.8-.19-1.66-.08-2.36.35-.8.5-1.29 1.4-1.25 2.33.02 1.1.84 2.11 1.93 2.31 1.05.23 2.27-.15 2.87-1.07.28-.46.39-1.01.38-1.55-.02-4.34-.01-8.68-.01-13.03Z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        {/* Links */}
+        <div>
+          <h4 className="font-black uppercase text-xs tracking-widest mb-6 text-yellow-400">Navigation</h4>
+          <ul className="space-y-4 font-bold text-sm opacity-80">
+            <li><Link to="/" className="hover:text-yellow-400 transition-colors">Home</Link></li>
+            <li><Link to="/services" className="hover:text-yellow-400 transition-colors">About Us</Link></li>
+            <li><Link to="/contact" className="hover:text-yellow-400 transition-colors">Contact</Link></li>
+          </ul>
+        </div>
+
+        {/* Expertise */}
+        <div>
+          <h4 className="font-black uppercase text-xs tracking-widest mb-6 text-yellow-400">Services</h4>
+          <ul className="space-y-4 font-bold text-sm opacity-80 underline underline-offset-4 decoration-blue-400">
+            <li>Deep Cleaning</li>
+            <li>Fumigation</li>
+            <li>Post Construction</li>
+            <li>Rug & Upholstery</li>
+          </ul>
+        </div>
+
+        {/* Contact info */}
+        <div>
+          <h4 className="font-black uppercase text-xs tracking-widest mb-6 text-yellow-400">Contact Info</h4>
+          <div className="space-y-4 opacity-80 text-sm font-bold">
+            <div className="flex gap-3"><MapPin size={18} className="text-yellow-400 shrink-0"/> Ikoyi, Lekki, VI, Banana Island</div>
+            <div className="flex gap-3"><Phone size={18} className="text-yellow-400 shrink-0"/> 08061946478</div>
+          </div>
+        </div>
+      </div>
+
+      <div className="max-w-7xl mx-auto pt-10 border-t border-white/5 text-center">
+        <p className="font-black uppercase text-[9px] tracking-[0.4em] opacity-40">
+          © 2026 SPAKU KLEANERS LIMITED. ALL RIGHTS RESERVED.
+        </p>
+      </div>
+    </footer>
+  );
+};
+
 // --- Main Router ---
 export default function App() {
   return (
@@ -147,11 +205,7 @@ export default function App() {
             <Route path="/contact" element={<Contact />} />
           </Routes>
         </main>
-        <footer className="bg-[#1a3c87] text-white py-12 mt-20 text-center border-t border-white/10">
-          <p className="font-black uppercase text-[10px] tracking-[0.5em] opacity-60">
-            © 2026 SPAKU KLEANERS LIMITED
-          </p>
-        </footer>
+        <Footer />
       </div>
     </Router>
   );
