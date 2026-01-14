@@ -198,7 +198,7 @@ const Footer = () => (
           </div>
           <p className="text-sm font-bold opacity-70 leading-relaxed max-w-xs">Premium hygiene solutions for Ikoyi, VI, and Lekki.</p>
           <div className="flex gap-4">
-            <a href="https://instagram.com/spaku.kleaners" className="bg-white/10 p-3 rounded-xl hover:bg-yellow-400 hover:text-blue-900 transition-all"><Instagram size={20} /></a>
+            <a href="https://www.instagram.com/spaku.kleaners?igsh=MXR0cnJneWJtbWI3ag==" className="bg-white/10 p-3 rounded-xl hover:bg-yellow-400 hover:text-blue-900 transition-all"><Instagram size={20} /></a>
             <a href="https://tiktok.com/@spaku.kleanerslimited" className="bg-white/10 p-3 rounded-xl hover:bg-black transition-all">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.17-2.89-.6-4.13-1.47-.13 3.35-.14 6.7-.13 10.05-.03 2.1-.8 4.25-2.4 5.68-1.74 1.61-4.32 2.22-6.55 1.61-2.22-.55-4.15-2.2-4.9-4.32-.88-2.35-.38-5.18 1.34-7.01 1.4-1.57 3.53-2.36 5.62-2.13v4.18c-.8-.19-1.66-.08-2.36.35-.8.5-1.29 1.4-1.25 2.33.02 1.1.84 2.11 1.93 2.31 1.05.23 2.27-.15 2.87-1.07.28-.46.39-1.01.38-1.55-.02-4.34-.01-8.68-.01-13.03Z"/></svg>
             </a>
