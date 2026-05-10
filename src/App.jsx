@@ -1,6 +1,23 @@
-import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { Menu, X, CheckCircle, Mail, Phone, MapPin, Instagram, Star, Send, ArrowUpRight, Check, RotateCcw } from 'lucide-react';
+
+// --- Google Tag Tracker Component ---
+// This ensures page views are tracked when navigating between routes in React
+const GoogleTagTracker = () => {
+  const location = useLocation();
+  const GA_ID = 'G-7MXVYMFT98';
+
+  useEffect(() => {
+    if (window.gtag) {
+      window.gtag('config', GA_ID, {
+        page_path: location.pathname + location.search,
+      });
+    }
+  }, [location]);
+
+  return null;
+};
 
 // --- Shared Navbar ---
 const Navbar = () => {
@@ -111,6 +128,14 @@ const Contact = () => {
       if (response.ok) {
         setStatus("success");
         form.reset();
+
+        // Trigger Conversion event for Google Ads/Analytics
+        if (window.gtag) {
+          window.gtag('event', 'generate_lead', {
+            'event_category': 'Contact',
+            'event_label': 'Spaku Booking Form'
+          });
+        }
       } else {
         setStatus("error");
       }
@@ -214,9 +239,31 @@ const Footer = () => (
 
 // --- Main Router ---
 export default function App() {
+  const GA_ID = 'G-7MXVYMFT98';
+
+  // Step 1: Initialize the tag scripts on component mount
+  useEffect(() => {
+    const script1 = document.createElement('script');
+    script1.async = true;
+    script1.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`;
+    document.head.appendChild(script1);
+
+    const script2 = document.createElement('script');
+    script2.innerHTML = `
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', '${GA_ID}');
+    `;
+    document.head.appendChild(script2);
+  }, []);
+
   return (
     <Router>
       <div className="min-h-screen bg-white selection:bg-yellow-200">
+        {/* Step 2: Add the tracker to monitor navigation changes */}
+        <GoogleTagTracker />
+        
         <Navbar />
         <main>
           <Routes>
