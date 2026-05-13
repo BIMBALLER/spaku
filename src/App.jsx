@@ -3,14 +3,19 @@ import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react
 import { Menu, X, CheckCircle, Mail, Phone, MapPin, Instagram, Star, Send, ArrowUpRight, Check, RotateCcw } from 'lucide-react';
 
 // --- Google Tag Tracker Component ---
-// This ensures page views are tracked when navigating between routes in React
 const GoogleTagTracker = () => {
   const location = useLocation();
   const GA_ID = 'G-7MXVYMFT98';
+  const AW_ID = 'AW-18150730623';
 
   useEffect(() => {
     if (window.gtag) {
+      // Track page view for Analytics
       window.gtag('config', GA_ID, {
+        page_path: location.pathname + location.search,
+      });
+      // Track page view for Google Ads
+      window.gtag('config', AW_ID, {
         page_path: location.pathname + location.search,
       });
     }
@@ -129,11 +134,17 @@ const Contact = () => {
         setStatus("success");
         form.reset();
 
-        // Trigger Conversion event for Google Ads/Analytics
+        // Trigger Conversion event for both Analytics and Google Ads
         if (window.gtag) {
           window.gtag('event', 'generate_lead', {
             'event_category': 'Contact',
             'event_label': 'Spaku Booking Form'
+          });
+          // Also send specifically to Google Ads conversion if you have a label
+          window.gtag('event', 'conversion', {
+              'send_to': 'AW-18150730623',
+              'value': 1.0,
+              'currency': 'NGN'
           });
         }
       } else {
@@ -240,30 +251,36 @@ const Footer = () => (
 // --- Main Router ---
 export default function App() {
   const GA_ID = 'G-7MXVYMFT98';
+  const AW_ID = 'AW-18150730623';
 
-  // Step 1: Initialize the tag scripts on component mount
   useEffect(() => {
+    // Analytics Script
     const script1 = document.createElement('script');
     script1.async = true;
     script1.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`;
     document.head.appendChild(script1);
 
-    const script2 = document.createElement('script');
-    script2.innerHTML = `
+    // Ads Script (using the ID you just provided)
+    const scriptAds = document.createElement('script');
+    scriptAds.async = true;
+    scriptAds.src = `https://www.googletagmanager.com/gtag/js?id=${AW_ID}`;
+    document.head.appendChild(scriptAds);
+
+    const scriptInit = document.createElement('script');
+    scriptInit.innerHTML = `
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', '${GA_ID}');
+      gtag('config', '${AW_ID}');
     `;
-    document.head.appendChild(script2);
+    document.head.appendChild(scriptInit);
   }, []);
 
   return (
     <Router>
       <div className="min-h-screen bg-white selection:bg-yellow-200">
-        {/* Step 2: Add the tracker to monitor navigation changes */}
         <GoogleTagTracker />
-        
         <Navbar />
         <main>
           <Routes>
