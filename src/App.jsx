@@ -66,7 +66,7 @@ const Home = () => {
     { src: "/what.mp4", title: "Commercial & Residential Overview" },
     { src: "/132682.mp4", title: "Deep Cleaning Showcase" },
     { src: "/132683.mp4", title: "Pest Eradication & Fumigation" },
-    { src: "/132684.mp4", title: "Rug & Upholstery Restoration" }
+    { src: "/134662.mp4", title: "Rug & Upholstery Restoration" }
   ];
 
   return (
