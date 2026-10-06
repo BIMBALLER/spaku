@@ -60,8 +60,18 @@ const Navbar = () => {
 // --- Home Page ---
 const Home = () => {
   const services = ["Commercial Cleaning", "Deep Cleaning", "Fumigation", "Industrial Cleaning", "Post Construction", "Rug & Upholstery"];
+  
+  // List of 4 videos
+  const videos = [
+    { src: "/what.mp4", title: "Commercial & Residential Overview" },
+    { src: "/132682.mp4", title: "Deep Cleaning Showcase" },
+    { src: "/132683.mp4", title: "Pest Eradication & Fumigation" },
+    { src: "/132684.mp4", title: "Rug & Upholstery Restoration" }
+  ];
+
   return (
     <div className="pt-20 overflow-x-hidden">
+      {/* Hero Section */}
       <section className="bg-slate-50 py-12 md:py-24 px-6">
         <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-10 md:gap-16 items-center">
           <div className="text-left">
@@ -98,7 +108,40 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="py-20 px-6 max-w-7xl mx-auto">
+      {/* Option B: 2x2 Video Grid Gallery */}
+      <section className="py-20 px-6 max-w-7xl mx-auto text-left">
+        <div className="mb-12">
+          <span className="text-blue-600 font-black text-xs uppercase tracking-widest block mb-2">Video Gallery</span>
+          <h2 className="text-4xl md:text-6xl font-black text-[#1a3c87] uppercase italic tracking-tight">Watch Our Work</h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {videos.map((vid, idx) => (
+            <div key={idx} className="bg-slate-900 rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-slate-100 group">
+              <div className="aspect-video relative overflow-hidden bg-slate-950">
+                <video 
+                  src={vid.src} 
+                  autoPlay 
+                  muted 
+                  loop 
+                  playsInline 
+                  webkit-playsinline="true"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              <div className="p-6 bg-slate-950 text-white flex justify-between items-center border-t border-white/10">
+                <h3 className="font-black uppercase italic tracking-tight text-lg">{vid.title}</h3>
+                <Link to="/contact" className="text-yellow-400 font-black text-[10px] uppercase tracking-widest hover:underline flex items-center gap-1 shrink-0 ml-4">
+                  Book <ArrowUpRight size={14} />
+                </Link>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* Our Expertise Section */}
+      <section className="pb-20 px-6 max-w-7xl mx-auto">
         <h2 className="text-3xl font-black uppercase italic mb-10 text-[#1a3c87] text-left">Our Expertise</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 text-left">
           {services.map((s) => (
@@ -260,7 +303,7 @@ export default function App() {
     script1.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`;
     document.head.appendChild(script1);
 
-    // Ads Script (using the ID you just provided)
+    // Ads Script
     const scriptAds = document.createElement('script');
     scriptAds.async = true;
     scriptAds.src = `https://www.googletagmanager.com/gtag/js?id=${AW_ID}`;
