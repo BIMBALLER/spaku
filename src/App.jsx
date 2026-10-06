@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import { Menu, X, CheckCircle, Mail, Phone, MapPin, Instagram, Star, Send, ArrowUpRight, Check, RotateCcw } from 'lucide-react';
 
@@ -10,11 +10,9 @@ const GoogleTagTracker = () => {
 
   useEffect(() => {
     if (window.gtag) {
-      // Track page view for Analytics
       window.gtag('config', GA_ID, {
         page_path: location.pathname + location.search,
       });
-      // Track page view for Google Ads
       window.gtag('config', AW_ID, {
         page_path: location.pathname + location.search,
       });
@@ -22,6 +20,60 @@ const GoogleTagTracker = () => {
   }, [location]);
 
   return null;
+};
+
+// --- Lazy Video Component ---
+// Only plays/loads when scrolled into view
+const LazyVideo = ({ src, title }) => {
+  const videoRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && videoRef.current) {
+            videoRef.current.play().catch(() => {});
+          } else if (videoRef.current) {
+            videoRef.current.pause();
+          }
+        });
+      },
+      { threshold: 0.25 }
+    );
+
+    if (videoRef.current) {
+      observer.observe(videoRef.current);
+    }
+
+    return () => {
+      if (videoRef.current) {
+        observer.unobserve(videoRef.current);
+      }
+    };
+  }, []);
+
+  return (
+    <div className="bg-slate-900 rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-slate-100 group">
+      <div className="aspect-video relative overflow-hidden bg-slate-950">
+        <video 
+          ref={videoRef}
+          src={src} 
+          muted 
+          loop 
+          playsInline 
+          preload="none"
+          webkit-playsinline="true"
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+        />
+      </div>
+      <div className="p-6 bg-slate-950 text-white flex justify-between items-center border-t border-white/10">
+        <h3 className="font-black uppercase italic tracking-tight text-lg">{title}</h3>
+        <Link to="/contact" className="text-yellow-400 font-black text-[10px] uppercase tracking-widest hover:underline flex items-center gap-1 shrink-0 ml-4">
+          Book <ArrowUpRight size={14} />
+        </Link>
+      </div>
+    </div>
+  );
 };
 
 // --- Shared Navbar ---
@@ -61,7 +113,6 @@ const Navbar = () => {
 const Home = () => {
   const services = ["Commercial Cleaning", "Deep Cleaning", "Fumigation", "Industrial Cleaning", "Post Construction", "Rug & Upholstery"];
   
-  // List of 4 videos
   const videos = [
     { src: "/what.mp4", title: "Commercial & Residential Overview" },
     { src: "/132682.mp4", title: "Deep Cleaning Showcase" },
@@ -101,6 +152,7 @@ const Home = () => {
               muted 
               loop 
               playsInline 
+              preload="metadata"
               webkit-playsinline="true"
               className="w-full h-full object-cover"
             />
@@ -108,7 +160,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Option B: 2x2 Video Grid Gallery */}
+      {/* Option B: 2x2 Video Grid Gallery with Lazy Load */}
       <section className="py-20 px-6 max-w-7xl mx-auto text-left">
         <div className="mb-12">
           <span className="text-blue-600 font-black text-xs uppercase tracking-widest block mb-2">Video Gallery</span>
@@ -117,25 +169,7 @@ const Home = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {videos.map((vid, idx) => (
-            <div key={idx} className="bg-slate-900 rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-slate-100 group">
-              <div className="aspect-video relative overflow-hidden bg-slate-950">
-                <video 
-                  src={vid.src} 
-                  autoPlay 
-                  muted 
-                  loop 
-                  playsInline 
-                  webkit-playsinline="true"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-              </div>
-              <div className="p-6 bg-slate-950 text-white flex justify-between items-center border-t border-white/10">
-                <h3 className="font-black uppercase italic tracking-tight text-lg">{vid.title}</h3>
-                <Link to="/contact" className="text-yellow-400 font-black text-[10px] uppercase tracking-widest hover:underline flex items-center gap-1 shrink-0 ml-4">
-                  Book <ArrowUpRight size={14} />
-                </Link>
-              </div>
-            </div>
+            <LazyVideo key={idx} src={vid.src} title={vid.title} />
           ))}
         </div>
       </section>
@@ -177,13 +211,11 @@ const Contact = () => {
         setStatus("success");
         form.reset();
 
-        // Trigger Conversion event for both Analytics and Google Ads
         if (window.gtag) {
           window.gtag('event', 'generate_lead', {
             'event_category': 'Contact',
             'event_label': 'Spaku Booking Form'
           });
-          // Also send specifically to Google Ads conversion if you have a label
           window.gtag('event', 'conversion', {
               'send_to': 'AW-18150730623',
               'value': 1.0,
@@ -297,13 +329,11 @@ export default function App() {
   const AW_ID = 'AW-18150730623';
 
   useEffect(() => {
-    // Analytics Script
     const script1 = document.createElement('script');
     script1.async = true;
     script1.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`;
     document.head.appendChild(script1);
 
-    // Ads Script
     const scriptAds = document.createElement('script');
     scriptAds.async = true;
     scriptAds.src = `https://www.googletagmanager.com/gtag/js?id=${AW_ID}`;
