@@ -2,7 +2,31 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Your custom styles below */
-body {
-  @apply antialiased text-slate-900;
+@layer base {
+  body {
+    @apply antialiased bg-[#081022] text-slate-100;
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  h1, h2, h3, .font-serif-luxury {
+    font-family: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
+  }
+}
+
+/* Custom gold scrollbar & subtle utilities */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #081022;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3d331a;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #d4af37;
 }

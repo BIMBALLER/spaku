@@ -1,16 +1,47 @@
-# React + Vite
+# Spaku Kleaners Limited
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Luxury Cleaning, Redefined.**
 
-Currently, two official plugins are available:
+Official web application for **Spaku Kleaners Limited**, providing premium residential, commercial, and industrial cleaning and fumigation services across **Ikoyi, Victoria Island, Lekki, and Banana Island, Lagos**.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Live Website:** [https://www.spakukleaners.com.ng/](https://www.spakukleaners.com.ng/)
+- **Ranked.ng Profile:** [Spaku Kleaners Limited (Ranked Verified)](https://ranked.ng/place/spaku-kleaners-limited-ifqzbo)
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Features
 
-## Expanding the ESLint configuration
+- **Luxury Dark Navy & Brushed Gold Aesthetic** (`#081022` & `#d4af37`) tailored for high-end residential and corporate clients.
+- **Full-Bleed Hero Video Showcase** with an interactive floating booking & availability bar.
+- **Service Catalog:** Commercial Cleaning, Deep Cleaning, Fumigation, Rug & Upholstery Restoration, Post-Construction Cleaning, and Industrial Facility Management.
+- **Live Field Video Portfolio (`Our Work in Action`):** IntersectionObserver-powered lazy-loading video reels showcasing real transformations.
+- **Concierge Booking & Quote Form:** Pre-fills service, location, property size, and preferred date from the landing page into a Formspree-backed inquiry workflow.
+- **Analytics & Verification:** Integrated Google Analytics (`G-7MXVYMFT98`), Google Ads conversion tracking (`AW-18150730623`), and official Ranked.ng verification badge.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## Tech Stack
+
+- **Framework:** React + Vite
+- **Routing:** React Router (`react-router-dom`)
+- **Styling:** Tailwind CSS
+- **Icons:** Lucide React
+- **Forms:** Formspree
+
+---
+
+## Project Structure
+
+```text
+├── public/
+│   ├── logo.jpg          # Brand logo
+│   ├── VID-20261121-WA0003.mp4       # Hero background & Commercial/Residential overview
+│   ├── VID-20261121-WA0004.mp4       # Deep Cleaning showcase
+│   ├── VID-20261121-WA0005.mp4        # Pest Eradication & Fumigation showcase
+│   └── 134662.mp4        # Rug & Upholstery restoration showcase
+├── src/
+│   ├── App.jsx           # Main application, routing, sections & booking form
+│   ├── index.css         # Global styles & luxury font definitions
+│   └── main.jsx          # React entry point
+├── index.html            # HTML template & metadata
+└── package.json
