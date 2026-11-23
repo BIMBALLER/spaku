@@ -731,7 +731,7 @@ const Contact = () => {
     const data = new FormData(form);
 
     try {
-      const response = await fetch('https://formspree.io/f/xlggbzro', {
+      const response = await fetch('https://formspree.io/f/mjkwrkkz', {
         method: 'POST',
         body: data,
         headers: { Accept: 'application/json' }
